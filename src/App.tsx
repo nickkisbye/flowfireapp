@@ -1,25 +1,46 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import AuthProvider, { AuthContext } from './providers/AuthProvider';
+import Home from './routes/Home';
+import LoginForm from './components/LoginForm';
+import { Container } from '@material-ui/core';
+import Chat from './routes/ Chat';
+import Friends from './routes/Friends';
+import Settings from './routes/Profile';
+import NavBar from './components/NavBar';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+
+      <AuthProvider>
+        <AuthContext.Consumer>
+          {({ user, isLoggedIn, token }: any) => {
+            if (!isLoggedIn) {
+              return <Container maxWidth="sm" style={{ marginTop: 60 }}><LoginForm /></Container>
+            } else {
+              return (
+                <React.Fragment>
+                  <Router>
+                    <NavBar>
+                      <Container maxWidth="sm" style={{ marginTop: 60 }}>
+                        <Switch>
+                          <Route exact path="/" component={Home} />
+                          <Route exact path="/chat" component={Chat} />
+                          <Route exact path="/friends" component={Friends} />
+                          <Route exact path="/settings" component={Settings} />
+                        </Switch>
+                      </Container>
+                    </NavBar>
+                  </Router>
+                </React.Fragment>
+              );
+            }
+          }}
+        </AuthContext.Consumer>
+      </AuthProvider>
+    </React.Fragment>
   );
 }
 
