@@ -18,18 +18,18 @@ function App() {
         <AuthContext.Consumer>
           {({ user, isLoggedIn, token }: any) => {
             if (!isLoggedIn) {
-              return <Container maxWidth="sm" style={{ marginTop: 60 }}><LoginForm /></Container>
+              return <Container maxWidth="sm" style={{ marginTop: 80 }}><LoginForm /></Container>
             } else {
               return (
                 <React.Fragment>
                   <Router>
                     <NavBar>
-                      <Container maxWidth="sm" style={{ marginTop: 60 }}>
+                      <Container maxWidth="sm" style={{ marginTop: 80 }}>
                         <Switch>
                           <Route exact path="/" component={Home} />
                           <Route exact path="/chat" component={Chat} />
                           <Route exact path="/friends" component={Friends} />
-                          <Route exact path="/settings" component={Settings} />
+                          <Route exact path="/profile" component={Settings} />
                         </Switch>
                       </Container>
                     </NavBar>
