@@ -1,7 +1,34 @@
 version: 2.1
 orbs:
   node: circleci/node@3.0.0
+
+jobs:
+  test:
+    docker:
+    - image: circleci/node:8
+    
+    working_directory: ~/repo
+    
+    steps:
+    - checkout
+    
+    # download and cache dependencies
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "package.json" }}
+        # fallback using latest cache
+        - v1-dependencies-
+        
+    - run: npm install
+    
+    - save  _cache:
+        paths:
+        - node_modules
+        key: v1-dependencies-{{ checksum "package.json" }}
+        
+    - run: npm test
+
 workflows:
   node-tests:
     jobs:
-      - node/test
+      - test
