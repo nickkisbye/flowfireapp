@@ -3,30 +3,31 @@ version: 2
 jobs:
   test:
     docker:
-    - image: circleci/node:8
+      - image: circleci/node:8
     
     working_directory: ~/repo
     
     steps:
-    - checkout
+      - checkout
     
-    # download and cache dependencies
-    - restore_cache:
+      # download and cache dependencies
+      - restore_cache:
         keys:
-        - v1-dependencies-{{ checksum "package.json" }}
-        # fallback using latest cache
-        - v1-dependencies-
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback using latest cache
+          - v1-dependencies-
         
-    - run: npm install
+      - run: npm install
     
-    - save  _cache:
-        paths:
-        - node_modules
-        key: v1-dependencies-{{ checksum "package.json" }}
+      - save_cache:
+          paths:
+          - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
         
-    - run: npm test
+      - run: npm test
 
 workflows:
+  version: 2
   node-tests:
     jobs:
       - test
