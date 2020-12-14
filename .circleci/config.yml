@@ -12,16 +12,16 @@ jobs:
     
       # download and cache dependencies
       - restore_cache:
-        keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback using latest cache
-          - v1-dependencies-
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback using latest cache
+            - v1-dependencies-
         
       - run: npm install
     
       - save_cache:
           paths:
-          - node_modules
+            - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
         
       - run: npm test
