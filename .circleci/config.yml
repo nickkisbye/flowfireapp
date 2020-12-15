@@ -59,7 +59,6 @@ jobs:
           name: copy to server
           command: scp -r build dat18a-hop@116.203.52.174:/var/www/hopfrontend
           
-    
 workflows:
   version: 2
   node-tests:
