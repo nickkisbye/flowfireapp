@@ -3,7 +3,7 @@ version: 2
 jobs:
   test:
     docker:
-      - image: cimg/node:15.4.0
+      - image: node/latest
     
     working_directory: ~/repo
     
@@ -27,7 +27,7 @@ jobs:
 
   deploy:
     docker:
-      - image: cimg/node:15.4.0
+      - image: node/latest
 
     working_directory: ~/repo
 
