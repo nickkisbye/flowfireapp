@@ -3,7 +3,7 @@ version: 2
 jobs:
   test:
     docker:
-      - image: circleci/node:8
+      - image: cimg/node:15.4.0
     
     working_directory: ~/repo
     
@@ -27,7 +27,7 @@ jobs:
 
   deploy:
     docker:
-      - image: circleci/node:8
+      - image: cimg/node:15.4.0
 
     working_directory: ~/repo
 
