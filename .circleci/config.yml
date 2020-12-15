@@ -3,7 +3,7 @@ version: 2
 jobs:
   test:
     docker:
-      - image: node/latest
+      - image: cimg/base:2020.01
     
     working_directory: ~/repo
     
@@ -27,7 +27,7 @@ jobs:
 
   deploy:
     docker:
-      - image: node/latest
+      - image: cimg/base:2020.01
 
     working_directory: ~/repo
 
