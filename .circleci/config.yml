@@ -3,7 +3,7 @@ version: 2
 jobs:
   test:
     docker:
-      - image: cimg/base:2020.01
+      - image: circleci/node:stretch
     
     working_directory: ~/repo
     
@@ -27,7 +27,7 @@ jobs:
 
   deploy:
     docker:
-      - image: cimg/base:2020.01
+      - image: circleci/node:stretch
 
     working_directory: ~/repo
 
