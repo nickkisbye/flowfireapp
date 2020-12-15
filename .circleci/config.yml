@@ -57,7 +57,7 @@ jobs:
       - run: ssh-keyscan 116.203.52.174 >> ~/.ssh/known_hosts
       - run:
           name: copy to server
-          command: scp -r build dat18a-hop@116.203.52.174:/var/www/hopfrontend
+          command: scp -r build/* dat18a-hop@116.203.52.174:/var/www/hopfrontend
           
 workflows:
   version: 2
