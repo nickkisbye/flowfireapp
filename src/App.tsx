@@ -5,7 +5,6 @@ import AuthProvider, { AuthContext } from './providers/AuthProvider';
 import Home from './routes/Home';
 import LoginForm from './components/LoginForm';
 import { Container } from '@material-ui/core';
-import Chat from './routes/ Chat';
 import Profile from './routes/Profile';
 import NavBar from './components/NavBar';
 
@@ -27,9 +26,6 @@ function App() {
                         <Switch>
                           <Route exact path="/" >
                             <Home {...user} />
-                          </Route>
-                          <Route exact path="/chat" >
-                            <Chat {...user} />
                           </Route>
                           <Route path="/profile/:id" >
                             <Profile {...user} />

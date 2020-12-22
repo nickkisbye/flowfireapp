@@ -47,8 +47,7 @@ function Settings(props: IUserData) {
         presence={PersonaPresence.online}
         hidePersonaDetails={false}
       />
-      <hr style={{ border: "1px solid #f8f8f8" }} />
-      <h3>Friends:</h3>
+      <h3>Friends</h3>
       <div style={{ display: "flex" }}>
         {friends.length === 0 ? (
           <span>No friends at the moment</span>
@@ -59,7 +58,7 @@ function Settings(props: IUserData) {
               text: friend.username,
             };
             return (
-              <Link to={`/profile/${friend.id}`}>
+              <Link style={{ color: 'black', textDecoration: 'none' }} to={`/profile/${friend.id}`}>
                 <Persona
                   {...friendPersona}
                   key={friend.username}
@@ -71,7 +70,7 @@ function Settings(props: IUserData) {
           })
         )}
       </div>
-      <h3>Number of chatmessages:</h3>
+      <h3>Number of chatmessages</h3>
       <span>0</span>
     </React.Fragment>
   );
