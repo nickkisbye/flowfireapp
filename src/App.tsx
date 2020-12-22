@@ -6,8 +6,7 @@ import Home from './routes/Home';
 import LoginForm from './components/LoginForm';
 import { Container } from '@material-ui/core';
 import Chat from './routes/ Chat';
-import Friends from './routes/Friends';
-import Settings from './routes/Profile';
+import Profile from './routes/Profile';
 import NavBar from './components/NavBar';
 
 function App() {
@@ -16,20 +15,25 @@ function App() {
 
       <AuthProvider>
         <AuthContext.Consumer>
-          {({ user, isLoggedIn, token }: any) => {
+          {({ user, isLoggedIn }: any) => {
             if (!isLoggedIn) {
               return <Container maxWidth="sm" style={{ marginTop: 80 }}><LoginForm /></Container>
             } else {
               return (
                 <React.Fragment>
                   <Router>
-                    <NavBar>
-                      <Container maxWidth="sm" style={{ marginTop: 80 }}>
+                    <NavBar {...user}>
+                      <Container maxWidth="sm" style={{ marginTop: 120 }}>
                         <Switch>
-                          <Route exact path="/" component={Home} />
-                          <Route exact path="/chat" component={Chat} />
-                          <Route exact path="/friends" component={Friends} />
-                          <Route exact path="/profile" component={Settings} />
+                          <Route exact path="/" >
+                            <Home {...user} />
+                          </Route>
+                          <Route exact path="/chat" >
+                            <Chat {...user} />
+                          </Route>
+                          <Route path="/profile/:id" >
+                            <Profile {...user} />
+                          </Route>
                         </Switch>
                       </Container>
                     </NavBar>

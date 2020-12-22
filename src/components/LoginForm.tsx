@@ -9,9 +9,8 @@ function LoginForm() {
     const [password, setPassword] = useState('');
 
     const onLogin = async (): Promise<void> => {
-        const token: string = await (await Axios.post('http://localhost:8080/token', { username, password })).data;
-         console.log(token);
-        if (token) localStorage.setItem('token', token);
+        const { data } = await (await Axios.post('http://localhost:8080/token', { username, password }));
+        if (data.token) localStorage.setItem('token', data.token);
         window.location.href = "/";
     };
 

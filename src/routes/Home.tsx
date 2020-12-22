@@ -1,9 +1,10 @@
-import React from 'react';
+import React from "react";
+import { IUserData } from "../providers/AuthProvider";
 
-function Home() {
+function Home(props: IUserData) {
   return (
     <React.Fragment>
-      Home
+      <h4>Welcome, {props.username}</h4>
     </React.Fragment>
   );
 }

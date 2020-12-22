@@ -1,18 +1,18 @@
 /* The navigation bar */
 .navbar {
     overflow: hidden;
-    background-color: #333333;
+    background-color: #eb4914;
     position: fixed; /* Set the navbar to fixed position */
     top: 0; /* Position the navbar at the top of the page */
     width: 100%; /* Full width */
-    box-shadow: 0px 1px 3px #000;
+    box-shadow: 0px 0.5px 3px #000;
   }
   
   /* Links inside the navbar */
   .navbar a {
     float: left;
     display: block;
-    color: #99aaaa;
+    color: #ddcfd7;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -20,6 +20,6 @@
   
   /* Change background on mouse-over */
   .navbar a:hover {
-    background: #ddd;
+    background: #ddcfd7;
     color: black;
   }

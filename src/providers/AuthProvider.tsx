@@ -4,25 +4,43 @@ import Axios from 'axios';
 export const AuthContext: any = React.createContext(null);
 
 interface AuthProviderState {
-    user: IUser;
+    user: IUserData | null;
     isLoggedIn: boolean;
+}
+
+export interface IUserData extends IUser {
     token: string;
 }
 
 interface IUser {
+    fireFlow: { id: number, username: string } | null
+    id: number;
+    role: { id: number, name: string };
+    steam: { steamid: string, username: string} | null
     username: string;
-    email: string;
-    fullname: string;
 }
 
 export default class AuthProvider extends React.Component<{}, AuthProviderState> {
 
     componentDidMount() {
-        const token = localStorage.getItem('token');
+        const token: string | null = localStorage.getItem('token');
+
         if(!token) {
-            this.setState({ isLoggedIn: false, token: '', user: { username: '', email: '', fullname: '' } });
+            this.setState({ isLoggedIn: false, user: null });
         } else {
-            this.setState({ token: token, isLoggedIn: true });
+            Axios.post('http://localhost:8080/me/' + token, {}, {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            })
+            .then((response) => {
+                if(!response.data) {
+                    this.setState({ isLoggedIn: false, user: null });
+                } else {
+                    response.data.token = token;
+                    this.setState({ user: response.data, isLoggedIn: true });
+                }
+            });
         }
     
     }
@@ -30,9 +48,8 @@ export default class AuthProvider extends React.Component<{}, AuthProviderState>
     constructor(props: any) {
         super(props);
         this.state = {
-            user: { username: '', email: '', fullname: '' },
-            isLoggedIn: false,
-            token: ''
+            user: null,
+            isLoggedIn: false
         }
     }
 
