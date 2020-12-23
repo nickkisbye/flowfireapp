@@ -9,6 +9,7 @@ import {
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import { environment } from "../App";
 import { IUserData } from "../providers/AuthProvider";
 
 initializeIcons();
@@ -24,11 +25,12 @@ function Settings(props: IUserData) {
   }
 
   useEffect(() => {
-    Axios.get("http://localhost:8080/users/getUser/" + id, {
+    Axios.get(`http://${environment}:8080/users/getUser/` + id, {
       headers: {
         Authorization: "Bearer " + props.token,
       },
     }).then(({ data }) => {
+
       setPersona({
         imageUrl: imageBaseUrl,
         text: data.username,
@@ -37,7 +39,7 @@ function Settings(props: IUserData) {
           data.fireFlow !== null ? "FlowFire bruger" : "Steam bruger",
       });
 
-      Axios.get("http://localhost:8080/friend/getFriends/" + id, {
+      Axios.get(`http://${environment}:8080/friend/getFriends/` + id, {
         headers: {
           Authorization: "Bearer " + props.token,
         },

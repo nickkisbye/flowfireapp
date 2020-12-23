@@ -2,6 +2,7 @@ import { PrimaryButton, TextField } from '@fluentui/react';
 import '../App.css';
 import Axios from 'axios';
 import React, { useState } from 'react';
+import { environment } from '../App';
 
 function LoginForm() {
 
@@ -9,7 +10,7 @@ function LoginForm() {
     const [password, setPassword] = useState('');
 
     const onLogin = async (): Promise<void> => {
-        const { data } = await (await Axios.post('http://localhost:8080/token', { username, password }));
+        const { data } = await (await Axios.post(`http://${environment}:8080/token`, { username, password }));
         if (data.token) localStorage.setItem('token', data.token);
         window.location.href = "/";
     };

@@ -1,5 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
+import { environment } from '../App';
 
 export const AuthContext: any = React.createContext(null);
 
@@ -28,7 +29,7 @@ export default class AuthProvider extends React.Component<{}, AuthProviderState>
         if(!token) {
             this.setState({ isLoggedIn: false, user: null });
         } else {
-            Axios.post('http://localhost:8080/me/' + token, {}, {
+            Axios.post(`http://${environment}:8080/me/` + token, {}, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
