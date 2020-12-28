@@ -44,5 +44,5 @@ function App() {
   );
 }
 
-export const environment = process.env.NODE_ENV === "production" ? "116.203.52.174" : "localhost";
+export const environment: string = process.env.NODE_ENV === "production" ? "116.203.52.174" : "localhost";
 export default App;
