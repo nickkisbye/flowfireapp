@@ -29,7 +29,7 @@ export default class AuthProvider extends React.Component<{}, AuthProviderState>
         if(!token) {
             this.setState({ isLoggedIn: false, user: null });
         } else {
-            Axios.post(`http://${environment}:8080/me/` + token, {}, {
+            Axios.post(`http://${environment}:8080/me/`, {}, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }

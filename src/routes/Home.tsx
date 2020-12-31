@@ -1,10 +1,11 @@
 import React from "react";
 import { IUserData } from "../providers/AuthProvider";
+import Chats from "../components/Chats";
 
 function Home(props: IUserData) {
   return (
     <React.Fragment>
-      <h4>Welcome, {props.username}</h4>
+      <Chats {...props}/>
     </React.Fragment>
   );
 }
