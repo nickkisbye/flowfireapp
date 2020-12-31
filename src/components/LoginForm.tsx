@@ -18,9 +18,9 @@ function LoginForm() {
     return (
         <div>
             <form onSubmit={onLogin}>
-            <TextField style={{ background: '#333', color: 'white' }} label="Username" value={username} onChange={(event, newValue: any) => { setUsername(newValue) }} />
-            <TextField style={{ background: '#333', color: 'white' }} label="Password" value={password} onChange={(event, newValue: any) => { setPassword(newValue) }} />
-            <PrimaryButton text="Login" onClick={onLogin} style={{ marginTop: 20 }} />
+            <TextField style={{ background: '#fff', color: '#333' }} label="Username" value={username} onChange={(event, newValue: any) => { setUsername(newValue) }} />
+            <TextField style={{ background: '#fff', color: '#333' }} label="Password" value={password} onChange={(event, newValue: any) => { setPassword(newValue) }} />
+            <PrimaryButton text="Login" onClick={onLogin} style={{ marginTop: 15, background: '#eb4914', border: 'none', padding: '25px', width: '100%', fontSize: '20px' }} />
             </form>
         </div>
     );   
