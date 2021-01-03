@@ -83,8 +83,6 @@ function Settings(props: IUserData) {
           })
         )}
       </div>
-      <h3>Number of chatmessages</h3>
-      <span>0</span>
     </React.Fragment>
   );
 }

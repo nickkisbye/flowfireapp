@@ -21,7 +21,7 @@ function Chats(props: IUserData) {
     const [client, setClient]: any = useState(null);
     const [message, setMessage]: [string, Dispatch<SetStateAction<string>>] = useState('');
     const [room, setRoom]: [IChatRoom, Dispatch<SetStateAction<IChatRoom>>] = useState({ id: 0, name: '' });
-    let [chatMessages, setChatMessages]: any = useState([]);
+    const [chatMessages, setChatMessages]: [IMessageType[] | any, Dispatch<SetStateAction<IMessageType[] | any>>] = useState([]);
 
     const connectToRoom = (roomId: number, roomName: string): void => {
         setRoom({ id: roomId, name: roomName });
@@ -33,7 +33,7 @@ function Chats(props: IUserData) {
         stompClient.connect({
             Bearer: props.token,
             room: roomId
-        }, async function () {
+        }, async function (): Promise<void> {
 
             stompClient.subscribe('/topic/public', onMessageReceived, { Bearer: props.token, room: roomId });
             stompClient.subscribe('/topic/' + roomId, onMessageReceived, { Bearer: props.token, room: roomId });
@@ -43,7 +43,7 @@ function Chats(props: IUserData) {
                     'Authorization': 'Bearer ' + props.token
                 }
             });
-            console.log(chatMessages);
+            
             setChatMessages((prev: any) => prev.concat(chatMessages.data));
 
             if (props.token) {
@@ -55,14 +55,14 @@ function Chats(props: IUserData) {
                 )
             }
 
-        }, function (error: any) {
+        }, function (error: string): void {
             console.log(error, "error");
             disconnectFromRoom();
         });
         setClient(stompClient);
     }
 
-    const disconnectFromRoom = () => {
+    const disconnectFromRoom = (): void => {
         if (client) {
             client.disconnect();
             client.unsubscribe('/topic/public');
@@ -72,7 +72,7 @@ function Chats(props: IUserData) {
         setChatMessages([]);
     }
 
-    const onMessageReceived = (payload: any) => {
+    const onMessageReceived = (payload: any): void => {
         const message: IMessageType = JSON.parse(payload.body);
         let obj = {};
 
@@ -102,10 +102,11 @@ function Chats(props: IUserData) {
                 };
                 break;
         }
+        
         setChatMessages((prev: any) => [...prev, obj]);
     }
 
-    const sendMessage = (event: any) => {
+    const sendMessage = (event: any): void => {
         if (message !== '' && client && room.id !== 0) {
             let chatMessage = {
                 sender: props.username,
